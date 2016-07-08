@@ -81,7 +81,6 @@ def students_by_house(filename):
             ]
     """
 
-    all_students = []
     gryffindor = []
     hufflepuff = []
     slytherin = []
@@ -90,8 +89,39 @@ def students_by_house(filename):
     ravenclaw = []
     tas = []
     instructors = []
-
+    all_students = [
+        gryffindor,
+        hufflepuff,
+        slytherin,
+        dumbledores_army,
+        order_of_the_phoenix,
+        ravenclaw,
+        tas,
+        instructors
+    ]
     # Code goes here
+    student_file = open(filename)
+    for line in student_file:
+        first, last, house, advisor, cohort = line.rstrip().split('|')
+
+        if house == 'Gryffindor':
+            gryffindor.append(last)
+        elif house == 'Ravenclaw':
+            ravenclaw.append(last)
+        elif house == 'Slytherin':
+            slytherin.append(last)
+        elif house == 'Hufflepuff':
+            hufflepuff.append(last)
+        elif house == 'Dumbledore\'s Army':
+            dumbledores_army.append(last)
+        elif house == 'Order of the Phoenix':
+            order_of_the_phoenix.append(last)
+        elif cohort == 'TA':
+            tas.append(last)
+        elif cohort == 'I':
+            instructors.append(last)
+
+    all_students = [sorted(the_list) for the_list in all_students]
 
     return all_students
 
@@ -166,9 +196,9 @@ def find_house_members_by_student_name(student_list):
 
 # Here is some useful code to run these functions!
 
-print unique_houses("cohort_data.txt")
-print sort_by_cohort("cohort_data.txt")
-# print students_by_house("cohort_data.txt")
+# print unique_houses("cohort_data.txt")
+# print sort_by_cohort("cohort_data.txt")
+print students_by_house("cohort_data.txt")
 # all_students_data = all_students_tuple_list("cohort_data.txt")
 # print all_students_data
 # find_cohort_by_student_name(all_students_data)
