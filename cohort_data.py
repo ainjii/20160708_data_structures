@@ -180,8 +180,21 @@ def find_name_duplicates(filename):
     """
 
     duplicate_names = set()
+    winter_15 = set()
+    spring_15 = set()
+    summer_15 = set()
 
-    # Code goes here
+    student_file = open(filename)
+    for student in student_file:
+        first, last, house, advisor, cohort = student.rstrip().split('|')
+        if cohort == 'Winter 2015':
+            winter_15.add(first)
+        elif cohort == 'Spring 2015':
+            spring_15.add(first)
+        elif cohort == 'Summer 2015':
+            summer_15.add(first)
+    duplicate_names = winter_15 & spring_15
+    duplicate_names = duplicate_names & summer_15
 
     return duplicate_names
 
@@ -208,7 +221,7 @@ def find_house_members_by_student_name(student_list):
 # print students_by_house("cohort_data.txt")
 # print all_students_tuple_list("cohort_data.txt")
 # print all_students_data
-all_students_data = all_students_tuple_list("cohort_data.txt")
-print find_cohort_by_student_name(all_students_data)
-# print find_name_duplicates("cohort_data.txt")
+# all_students_data = all_students_tuple_list("cohort_data.txt")
+# print find_cohort_by_student_name(all_students_data)
+print find_name_duplicates("cohort_data.txt")
 # find_house_members_by_student_name(all_students_data)
